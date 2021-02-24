@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,14 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String acrom ="";
+	String[] 	Spletphrase = phrase.split("[ ,-]+");
+	
+	for (String a:Spletphrase ) {
+		acrom += a.charAt(0);
+	}
+	
+		return acrom;
 	}
 
 	/**
@@ -85,17 +93,31 @@ public class EvaluationService {
 
 		public boolean isEquilateral() {
 			// TODO Write an implementation for this method declaration
+			if(sideOne == sideTwo && sideOne == sideThree ) {
+				return true;
+			}else {
 			return false;
+			}
 		}
 
 		public boolean isIsosceles() {
 			// TODO Write an implementation for this method declaration
+			if(sideOne == sideTwo || sideOne == sideThree || sideTwo == sideThree) {
+				return true;
+			}else {
 			return false;
+			}
+			
 		}
 
 		public boolean isScalene() {
 			// TODO Write an implementation for this method declaration
+			if(sideOne != sideTwo || sideOne != sideThree || sideTwo != sideThree) {
+				return true;
+			}else {
 			return false;
+			}
+			
 		}
 
 	}
@@ -117,7 +139,41 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0 ;
+		
+		 String uperString =string.toUpperCase();
+		 
+		for (int i=0; i< uperString.length(); i++) {
+			
+		switch (uperString.charAt(i)) {
+		case 'A': case 'E': case 'I': case 'O': case 'U': case 'L': case 'N': case 'R': case 'S': case 'T': 
+		 score +=1;
+		 break; 
+		case 'D': case 'G':  
+		    score +=2;
+		    break;
+		case 'B': case 'C': case 'M': case 'P':  
+		    score +=3;
+		    break;
+		case 'F': case 'H': case 'V': case 'W': case 'Y': 
+		    score +=4; 
+		    break;
+		case 'K': 
+		    score +=5;
+		    break;
+		case 'J': case 'X':
+		    score +=8; 
+		    break;
+		case 'Q': case 'Z':
+		    score +=10;
+		    break;
+		default:
+			score=  0;
+		
+		}
+		}
+		
+		return score;
 	}
 
 	/**
@@ -153,7 +209,79 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		System.out.print("string :"+string);
+		String rstr="", st="";;
+		boolean check= true;
+		
+		String[] str=string.split("[() .-]");
+		for (String a:str ) {
+			st+= a;
+		}
+		String[] st2=st.split("");
+		System.out.print("Number is :"+ st2.length);
+		
+		String str2="";
+		for(String s : str) {
+			str2 +=s;
+		}
+	
+		if (st2.length < 10) {
+			 rstr="0";
+			 check=false;
+		}
+		else if(st2.length > 11) {
+			 rstr="0";
+			 check=false;
+		}
+		else if (st2.length == 11 || st2.length == 10 ) {
+			
+				//String[] str3= null;
+				String Nstr="",substr="";
+				
+				if (st2.length == 11) {
+				for (int i = 0; i < st2.length - 1; i++) {
+				    st2[i] = st2[i + 1];
+				}
+				}
+				for (String s: str) {
+					Nstr +=s.charAt(0);
+					substr +=s.substring(1);
+				}
+				
+				System.out.print("@@@( "+substr+")@@@@@");
+				String Nstr3=Nstr.substring(0,Nstr.length()-1);
+				System.out.print("######( "+Nstr3+")#####");
+				String[] Nstr2=Nstr3.split("");
+				for(String s: Nstr2) {
+					System.out.print("####(((( "+s+"))))#####");
+				}
+				String[] substr2=substr.split("");
+				for (String s: Nstr2) {
+					if(s != "2"||s !="3"||s !="4"||s != "5"||s !="6"||s !="7"||s !="8"||s !="9") {
+						 rstr +="0";
+						 check=false;
+					}
+					
+				
+				}
+				for (String s: substr2) {
+					if(s != "0"|| s !="1"||s !="2"||s !="3" ||s !="4"||s !="5"||s !="6"||s !="7"||s !="8"||s !="9") {
+						rstr += "0";
+						check=false;
+					}else {
+						if (  check == true ) {
+						for(String  s1: str) {
+							rstr +=s1;
+							System.out.print("%%%(((( "+s+"))))%%%%");
+						}
+						
+						}
+					}
+			  } 
+			
+			
+		}
+	return rstr;
 	}
 
 	/**
